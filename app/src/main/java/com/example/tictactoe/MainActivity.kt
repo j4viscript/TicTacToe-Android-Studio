@@ -1,5 +1,6 @@
 package com.example.tictactoe
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -54,17 +55,17 @@ class MainActivity : AppCompatActivity()
         if(checkForVictory(NOUGHT))
         {
             noughtsScore++
-            result("Noughts Win!")
+            result("Circulo Gana!")
         }
         else if(checkForVictory(CROSS))
         {
             crossesScore++
-            result("Crosses Win!")
+            result("Cruz Gana!")
         }
 
         if(fullBoard())
         {
-            result("Draw")
+            result("Empate")
         }
 
     }
@@ -100,11 +101,11 @@ class MainActivity : AppCompatActivity()
 
     private fun result(title: String)
     {
-        val message = "\nNoughts $noughtsScore\n\nCrosses $crossesScore"
+        val message = "\nCirculo $noughtsScore\n\nCruz $crossesScore"
         AlertDialog.Builder(this)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton("Reset")
+            .setPositiveButton("Reiniciar")
             { _,_ ->
                 resetBoard()
             }
@@ -146,11 +147,13 @@ class MainActivity : AppCompatActivity()
         if(currentTurn == Turn.NOUGHT)
         {
             button.text = NOUGHT
+            button.setTextColor(Color.parseColor("#FF0D82DF"))
             currentTurn = Turn.CROSS
         }
         else if(currentTurn == Turn.CROSS)
         {
             button.text = CROSS
+            button.setTextColor(Color.parseColor("#E81010"))
             currentTurn = Turn.NOUGHT
         }
         setTurnLabel()
@@ -160,9 +163,9 @@ class MainActivity : AppCompatActivity()
     {
         var turnText = ""
         if(currentTurn == Turn.CROSS)
-            turnText = "Turn $CROSS"
+            turnText = "Turno: $CROSS"
         else if(currentTurn == Turn.NOUGHT)
-            turnText = "Turn $NOUGHT"
+            turnText = "Turno: $NOUGHT"
 
         binding.turnTV.text = turnText
     }
